@@ -2,7 +2,9 @@ package ch06.sec06.exam01;
 
 public class Car {
 //필드 선언
+	String company = "현대자동차";
 	String model = "그랜저";
-	boolean start = true;
-	int speed = 100;
+	String color = "검정";
+	int maxSpeed = 300;
+	int speed;
 }
