@@ -17,6 +17,20 @@ public class CarExMain_01 {
 		
 		//메서드호출 : 참조변수명.메서드명()
 		myCar.move();
+		System.out.println(myCar);
+		System.out.println(myCar.toString());
+		
+		//Object클래스 (교재 457) / toString(); 는 p464 
+		//Object클래스는 최상위클래스로
+		//모든 클래스는 Object클래스를 상속받는다.
+		
+		//Object 클래스의 toString(); 객체의 문자정보를 리턴
+		// 객체의 문자 정보란 ? 객체를 문자열로 표현한 값을 말한다.
+		// 기본적으로 "패키지명.클래스명@16진수 해시코드" 로 구성된다.
+		
+		
+		
+	
 
 	}
 
