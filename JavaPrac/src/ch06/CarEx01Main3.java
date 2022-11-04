@@ -28,13 +28,18 @@ public class CarEx01Main3 {
 		myCar.directionFront();
 		myCar.directionFront();
 		myCar.directionBack();
-		myCar.controlSpeed(0);
+		myCar.controlSpeed();
+		myCar.controlSpeed();
+		myCar.controlSpeed();
+		myCar.controlSpeed();
+
+
 		
-		myCar.move();{
-		for(int i=1; i<=100; i++) {
-			myCar.controlSpeed(10);
-		}
-		}
+//		myCar.move();{
+//		for(int i=1; i<=100; i++) {
+//			myCar.controlSpeed(10);
+//		}
+//		}
 	}
 
 }

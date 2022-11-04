@@ -68,7 +68,7 @@ public class CarEx01 {
 		distance -= 10;
 		System.out.println(distance);
 	}
-	
+	void controlSpeed () {}
 	void controlSpeed (int s) {
 	
 //		System.out.println("controlSpeed()진입");
