@@ -5,6 +5,7 @@ public class KoreanExample {
 	public static void main(String[] args) {
 		//Korean 객체 생성
 		Korean k1 = new Korean("윤정진", "931234-1234567");
+		//nation 은 초기값이 설정되어 있음. 
 		
 		//korea 객체 데이터 읽기
 		System.out.println("k1 nation" + k1.nation);
