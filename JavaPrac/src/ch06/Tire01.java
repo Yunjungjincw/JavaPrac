@@ -6,6 +6,7 @@ public class Tire01 {
 	String maker = "금호"; //제조회사
 	String proDate = "20221103";//제조년월일
 	int price = 2;//가격
+	double wearRate = 0.0;
 	
 	
 	

@@ -2,7 +2,7 @@ package ch06;
 
 //이 클래스는 실행클래스
  
-public class CarExMain_01 {
+public class CarEx01Main {
 
 	public static void main(String[] args) {
 		// Class (클래스)를 이용하여 object(객체)를 생성한다.
