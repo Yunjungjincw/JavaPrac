@@ -32,8 +32,8 @@
 <br/>7.3 부모 생성자 호출
 
 2022-11-07
-<br/>메소드 재정의
-<br/>final 클래스와 final 메소드
-<br/>protected 접근 제한자
+<br/>7.4 메소드 재정의
+<br/>7.5 final 클래스와 final 메소드
+<br/>7.6 protected 접근 제한자
 
 
