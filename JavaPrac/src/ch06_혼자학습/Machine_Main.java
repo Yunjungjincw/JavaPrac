@@ -20,7 +20,8 @@ public class Machine_Main {
 				
 				
 				
-				
+				System.out.println("게임 소유자 = "+playstation.host);
+				System.out.println("게임기 색상= "+playstation.color);
 	}
 
 }

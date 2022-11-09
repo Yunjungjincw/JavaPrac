@@ -26,6 +26,8 @@ public class Machine {
 class Playstation extends Machine{
 
 	//필드
+	String host;
+	String color;
 	
 
 	
