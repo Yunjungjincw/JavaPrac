@@ -36,5 +36,9 @@
 <br/>7.5 final 클래스와 final 메소드
 <br/>7.6 protected 접근 제한자
 <br/>+ 인스턴스멤버와 this 복습 
+<br/>+ 정적 멤버와 static
 
 
+2022-11-08
+<br/>접근제한자 (개념복습)
+<br/>getter와 setter 메소드 (실습)
