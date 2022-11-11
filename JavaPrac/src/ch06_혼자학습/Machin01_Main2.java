@@ -74,7 +74,30 @@ public class Machin01_Main2 {
 //		mc4.makeCall();
 		mc4.powerOn();
 		mc4.powerOff();
-	
+		System.out.println("---------------------------------");
+		
+		
+		
+		System.out.println("강제타입변환");
+		Machin2 mc5 = new SmartPhone();
+		//강제 형변환 p324~325
+//		부모 타입을 자식 타입으로 변환하는 것
+//		클래스 변수  = (강제 클래스명) 부모타입 참조변수
+		
+		
+		Phone01 p2 = (Phone01)mc5;
+		
+		p2.powerOn();
+		p2.makeCall();
+//		System.out.println("보낸메세지"+p2.sendMSG("dd"));
+		p2.receiveCall();
+		//강제 형변환 p324~325
+//		부모 타입을 자식 타입으로 변환하는 것
+//		클래스 변수  = (강제 클래스명) 부모타입 참조변수
+		
+		SmartPhone s2 = (SmartPhone)p2;
+		s2.powerOn();
+		s2.receiveMSG("s2 - 뭘ㄷ ㅏㅇ근");
 	}	
 	
  
