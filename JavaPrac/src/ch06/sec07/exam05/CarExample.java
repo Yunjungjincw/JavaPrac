@@ -11,7 +11,7 @@ public class CarExample {
 		
 		
 		Car car2 = new Car("정진이차");
-		System.out.println("카2 컴퍼니:"+ car2.company);
+		System.out.println("카2컴퍼니:"+ car2.company);
 		System.out.println("카2모델:"+car2.model);
 		System.out.println();
 		
