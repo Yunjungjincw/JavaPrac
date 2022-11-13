@@ -18,7 +18,9 @@ public class Car {
 	}
 	Car(String model, String color){
 		this(model, color, 250);
+		System.out.println("2");
 	}
+	
 	Car(String model, String color, int maxSpeed){
 		this.model = model;
 		this.color = color;
