@@ -1,4 +1,4 @@
-package ch15_collection;
+package AC_ch15_collection;
 
 
 //java.lang 패키지를 제외한 그 외 패키지는 import 해야한다.
