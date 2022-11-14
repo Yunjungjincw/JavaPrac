@@ -35,7 +35,7 @@ public class ArrayList01 {
 		//value 추가 
 		//List에는 다양한 타입의 value을 추가할 수 있음.
 		// 배열> 배열(array)에는 동일한 타입의 value을 추가. ( String, int , double, boolean, date ?, char ...)
-		list.add("홍길동");
+		list.add("이렇게긴 이름을 봤나.");
 		list.add(new String("서울시 강남구"));
 		list.add("hid");
 		list.add(20);
@@ -46,6 +46,65 @@ public class ArrayList01 {
 		int result = list.size();
 		System.out.println("Array size: "+result);
 		System.out.println(list);
+		
+		// 특정위치에 있는 요소 (item, element)를 가져오기
+		//get(인덱스)
+		Object obj = list.get(0);
+		System.out.println("이름: "+obj);
+		System.out.println(obj);
+		
+		// String으로 내려가는 다운캐스팅을 해줘야, obj의 index를 뽑을 수 있음.
+		//(강제 형변환) 변수
+		//여기에서는 String으로 강제 형변환하여
+		//String 클래스의 length()메서드를 호출하였다.
+		//Object에는 length()메서드가 없기 때문.
+		System.out.println("---------");
+		String strObj = (String)obj;
+		System.out.println(strObj.length()); //글자길이
+		
+		
+	
+		System.out.println("---------");
+		Object obj2 = list.get(1);
+		System.out.println("주소 길이: "+((String)obj2).length());
+		
+		String strObj2 = (String)obj2;
+		System.out.println(strObj2.length());
+		System.out.println();
+//		String strObj2 = (String)obj;
+//		System.out.println(strObj2.length());
+		System.out.println("---------");
+		
+		
+		//인덱스 4,5,6,7 에 담긴 value는 
+		//Object타입의 변수date4에 저장 후 출력
+		//instanceof 클래스명 : 특정 클래스의 객체이면 true리턴
+		
+		
+		Object obj4 = null;
+		String type = "";
+		for(int i =3; i<7; i++) {
+			obj4=list.get(i);
+			if(obj4 instanceof Integer) {
+			type="정수:";
+		} else if (obj4 instanceof Double){
+			type="실수 :";
+		} else if (obj4 instanceof Character) {
+			type="Character: ";
+		} else if (obj4 instanceof Boolean) {
+			type="Boolean: ";
+		}
+			System.out.println(obj4);
+	}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 		
 	}
