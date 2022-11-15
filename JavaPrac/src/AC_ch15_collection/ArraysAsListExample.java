@@ -16,6 +16,8 @@ public class ArraysAsListExample {
 		//클래스명.메서드명()
 //		Arrays.asList(a) : 고정된 객체들로 구성된 List 생성
 		//아래는 고정된 String 객체를 요소로 갖는 ArrayList 객체 생성
+		
+		
 		List<String> list = Arrays.asList("중앙", "정보", "학원");
 		System.out.println("-------------for문 사용-------------");
 		for(int i=0; i<list.size(); i++) {
@@ -29,11 +31,31 @@ public class ArraysAsListExample {
 		
 		//정수로 고정Integer된 객체를 요소로 갖는 ArrayList 객체생성
 //		Arrays.asList(10,20,30,40,50,60);
+		
+		
+		//Boxing: 기본 int 인 10 등등이 Integer클래스로 자동박싱
 		List<Integer> list1 = Arrays.asList(10,20,30,40,50,60);
+		for(Integer s : list1) {
+			System.out.println("클래스 Integer"+s);
+			
+		}
+		
 		for(int a : list1) {
 			//변수 v의 타입은 기본타입인 int에 저장되면서
 			//자동형변환되었다 => 클래스 => 기본타입으로 언박싱(unBoxing)
-			System.out.println(a);
+			System.out.println("기본타입"+a);
 		}
+		
+		
+		/*
+		 * p527
+		 * 자동 박싱과 언박싱
+		 * 
+		 * 자동박싱 - 포장 클래스 타입에 기본값이 대입될 경우 발생
+		 * Integer obj = 100;
+		 * 
+		 * 자동 언박싱 - 기본 타입에 포장객체가 대입될 경우 발생
+		 * int a = obj;
+		 */
 	}
 }
