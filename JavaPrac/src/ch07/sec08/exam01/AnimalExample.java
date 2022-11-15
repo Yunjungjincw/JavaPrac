@@ -22,7 +22,7 @@ public class AnimalExample {
 		
 		
 		
-		//메소드의 다형성
+		//메소드의 다형성//
 		animalSound(new Dog());
 		animalSound(new Cat());
 	}
