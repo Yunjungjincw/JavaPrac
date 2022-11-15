@@ -1,5 +1,7 @@
 package ch07.sec06.package2;
 
+//D는 부모클래스로 A를 상속 받음.
+// 객체를 생성하지 않고 메소드를 바로 호출 가능함.
 import ch07.sec06.package1.A;
 
 public class D extends A{
