@@ -10,7 +10,7 @@ public interface RemoteControl {
 	 void setVolume(int volume);
 	 
 	 
-	 //디폴트 인스턴슴 메소드
+	 //디폴트 인스턴스 메소드
 	 default void setMute(boolean mute) {
 		 if(mute) {
 			 System.out.println("무음 처리합니다");
