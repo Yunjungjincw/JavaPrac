@@ -2,7 +2,10 @@ package AC_ch15_collection;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 public class HashMap01_p743 {
 
@@ -54,12 +57,49 @@ public class HashMap01_p743 {
 		
 		
 		
-		
+		System.out.println("-----------");
 		// key를 모르면 모든 key를 꺼내기 => while 반복문
 		// 꺼낸 key 하나 하나에 대해서 
 		// => 각 key에 대한 value를 꺼내기
+		Set<String> keySet = map1.keySet();
+		//key하나씩 꺼내기
+		Iterator<String> keyIterator = keySet.iterator();
+		while(keyIterator.hasNext()) {
+			//각 각의 key에 대한 value를 꺼내기
+			String key = keyIterator.next();
+			//각 각의 key에 대한 value를 꺼내기
+			//key를 이용하여 value를 꺼내기
+			//key를 알면 get(키명)
+			 int value = map1.get(key);
+			 System.out.println(key +":"+value);
+		}
+		//객체 삭제 remove (key)
+		map1.remove("동장군");
+		System.out.println("remove 후의 size: "+(map1.size()));
 		
-
+		System.out.println("-------entrySet 이용------");
+		//객체를 하나씩 처리 entrySet()이용
+		 Set<Map.Entry<String, Integer>> entrySet = map1.entrySet();
+		 Iterator<Map.Entry<String, Integer>> entryIterator= entrySet.iterator();
+		 while(entryIterator.hasNext()) {
+			 Entry<String, Integer> entry = entryIterator.next();
+			 String key = entry.getKey();
+			 //Integer value= entry.getValue(); wrapper 클래스 타입으로 받음
+			 Integer value= entry.getValue();
+			 //int value = entry.getValue();
+			 
+			 System.out.println(key+":"+value);
+		 }
+		 
+		 //모든 객체 삭제
+		 map1.clear();
+		 System.out.println("clear()후 개수 = "+map1.size());
+		 if(map1.isEmpty()) {
+			 System.out.println("비어있어요");
+		 } else {
+			 System.out.println("비어 X");
+		 }
+//		 System.out.println(map1.isEmpty());
 	}
 
 }
