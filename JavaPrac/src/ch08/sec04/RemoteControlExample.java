@@ -10,13 +10,10 @@ public class RemoteControlExample {
 		rc.turnOff();
 		
 		
-		
-		
 		rc = new Audio();
 		rc.turnOn();
 		rc.setVolume(-10);
 		rc.turnOff();
-
 	}
 
 }
