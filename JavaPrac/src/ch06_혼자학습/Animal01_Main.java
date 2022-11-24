@@ -6,11 +6,5 @@ public class Animal01_Main {
 		Animal01 animal = new Animal01("뭐지","뭐지");
 		System.out.println(animal);
 		System.out.println(animal.toString());
-		
-		
-	
-	
-	
 	}
-
 }

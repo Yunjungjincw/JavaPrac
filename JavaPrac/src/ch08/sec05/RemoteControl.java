@@ -19,9 +19,7 @@ public interface RemoteControl {
 		 }else {
 			 System.out.println("무음 해제합니다.");
 		 }
-		 
 	 }
-	 
 	 // interface RemoteControl 소속이다. 객체 필요없다.
 	 public  static void changeBattery() {
 		 System.out.println("리모컨 건전지를 교환합니다");
