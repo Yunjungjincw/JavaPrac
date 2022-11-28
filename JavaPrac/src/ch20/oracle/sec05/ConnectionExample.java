@@ -58,16 +58,14 @@ public class ConnectionExample {
 				System.out.println("연결 성공");
 			
 			
-				//DB작업
-				//~~
+		//DB작업
 				
 			}catch(SQLException e){
 				e.printStackTrace();
 			}
 			System.out.println("연결 끊김");
 
-				//DB작업
-				//~~
+		//DB작업
 				
 			
 		} catch (ClassNotFoundException e1) {
