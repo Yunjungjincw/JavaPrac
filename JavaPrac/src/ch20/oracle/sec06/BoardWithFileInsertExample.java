@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class BoardWithFileInsertExample {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		Connection conn = null;
 		
 		try {

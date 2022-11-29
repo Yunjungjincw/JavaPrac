@@ -118,7 +118,7 @@
 //				System.out.println("executeUpdate()실행관련 에러");
 //				e1.printStackTrace();
 //			}
-//			
+//			 
 //
 //			try {
 //				if(rs!=null) {	
