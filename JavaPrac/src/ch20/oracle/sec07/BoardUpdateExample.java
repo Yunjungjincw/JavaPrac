@@ -1,4 +1,4 @@
-package ch20.oracle.sec06;
+package ch20.oracle.sec07;
 
 import java.io.FileInputStream;
 import java.sql.Blob;
@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class BoardWithFileInsertExample {
+public class BoardUpdateExample {
 
 	public static void main(String[] args) { 
 		Connection conn = null;
@@ -23,35 +23,29 @@ public class BoardWithFileInsertExample {
 			
 			
 			//DB작업 매개변수화 된  insert 문
-			String sql = 
-					"insert into boards (bno, btitle, bcontent, bwriter, bdate, bfilename, bfiledata) "
-					+ " values (seq_bno.nextval, ?, ?, ?, sysdate, ?, ?)";
-			PreparedStatement pstmt = conn.prepareStatement(sql, new String[] {"bno","btitle"});
+			String sql = new StringBuilder()
+					.append("update boards set ")
+					.append("btitle=?, ")
+					.append("bcontent=?, ")
+					.append("bfilename=?, ")
+					.append("bfiledata=? ")
+					.append("where bno=?")
+					.toString();
+					// toString이 문자열을 리턴해주니까 String sql에 넣을 수 있음.
+			PreparedStatement pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, "눈 오는 날8");
-			pstmt.setString(2, "함박눈이 내려요.");
-			pstmt.setString(3, "winter");
-			pstmt.setString(4, null);
-			pstmt.setBlob(5, new FileInputStream("src/ch20/oracle/sec05/1.png"));
+			pstmt.setString(1, "비가 내려요");
+			pstmt.setString(2, "겨울비는 추워요.");
+			pstmt.setString(3, "1.png");
+			pstmt.setBlob(4, new FileInputStream("src/ch20/oracle/sec07/1.png"));
+			pstmt.setInt(5,6);
 			//filenot exception 때문에 exception 만 잡아줌
 		
 			
 			//반영된 행의 수를 리턴한다.
 			int rows = pstmt.executeUpdate();
+			System.out.println("수정된 행 수: "+rows);
 			// executeUpdate() => 실행하는 코드
-			if(rows ==1) {
-				ResultSet rs = pstmt.getGeneratedKeys();
-				
-				if(rs.next()) {
-					int bno = rs.getInt(1);
-					System.out.println("저장된 bno :"+ bno);
-					
-					String btitle = rs.getString(2);
-					System.out.println("저장된 btitle: "+btitle);
-				}
-				rs.close();
-			}
-			System.out.println("저장된 행수 : "+rows);
 			
 			pstmt.close();
 		} catch (Exception e) {
@@ -66,7 +60,6 @@ public class BoardWithFileInsertExample {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
 			}
 			System.out.println("연결 끊김");
 		}
