@@ -68,33 +68,61 @@ public class DbmsPrac {
 		obj.selectEmpList();//사원목록조회
 		
 		System.out.println();//빈줄
-		System.out.println("--아래는 사원입사----");
+//		System.out.println("--아래는 사원입사----");
 		obj.insertEmp("이강인","개발",4800,1500);//사원입사
 		
 		System.out.println();//빈줄
-		System.out.println("--아래는 사원목록조회----------------------");
+//		System.out.println("--아래는 사원목록조회----------------------");
 		obj.selectEmpList();//사원목록조회
-		
-		//사원정보수정
-		
-		obj.selectEmp(7902);//특정사원조회
+		System.out.println("--아래는 사원 정보 변경----------------------");
+		obj.updateEmp(9000);
+		System.out.println("--아래는 특정사원조회----------------------");
+		obj.selectEmp(100);//특정사원조회
 		
 		System.out.println();//빈줄
-		System.out.println("--아래는 사원삭제----");
+//		System.out.println("--아래는 사원삭제----");
 		obj.deleteEmp(9012);// 사번이 9012인 사원삭제
 		
 		System.out.println();//빈줄
-		System.out.println("--아래는 사원목록조회----------------------");		
+//		System.out.println("--아래는 사원목록조회----------------------");		
 		obj.selectEmpList();//사원목록조회
 		
 
 	}//main
-	
+	//수정
+	public void updateEmp(int empno) {
+		//3.객체준비-Statement객체,PreparedStatement객체
+		try {
+			String sql = "UPDATE emp " + 
+				"SET sal=sal*5 " + 
+				"WHERE empno=?";
+			stmt = conn.prepareStatement(sql);
+			System.out.println("3.PreparedStatement객체 생성");
+		
+			//4.쿼리실행 set데이터타입(?의순서, 값)
+			stmt.setInt(1, empno);
+			int resultCnt = stmt.executeUpdate();
+			System.out.println("4.쿼리실행결과 리턴받은 row수="+resultCnt);
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+		}
+		
+		//5.자원반납
+		try {
+			if(stmt!=null) {
+				stmt.close();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("5.사원수정 자원반납완료");
+	}//updateEmp()끝
 	//특정사원조회-- 메서드호출시 조회하고자 하는 사원번호를 받아서 매개변수 empno에 저장
 		public void selectEmp(int empno) {
-				System.out.println("selectEmp()진입");
+				System.out.println("selectEmp()진입 empno="+empno);
 				
 				ResultSet rs = null;
+				//select로 나온 결과값을 나타내주는 거 = 
 				String sql = "SELECT e.EMPNO,e.ENAME,e.job,e.sal,nvl(e.comm,1230) as bonus, d.dname "
 							+ " FROM   EMP e join dept d on e.deptno=d.deptno"
 							+ " where e.empno=?";
@@ -127,7 +155,7 @@ public class DbmsPrac {
 						System.out.println(dname);
 						System.out.println();//줄바꿈
 					} else { //조회한 사번의 사원이 존재하지 않을 경우
-						System.out.println("조회한 사번인 사원이 존재하지 않아요");
+						System.out.println("조회한 사번("+ empno+")사원이 존재하지 않아요");
 					}
 					
 					

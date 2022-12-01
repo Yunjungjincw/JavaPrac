@@ -33,6 +33,7 @@ public class UserInsertExample {
 			pstmt.setString(5, "spring@mycompany.com");
 			
 			//반영된 행의 수를 리턴한다.
+			//칼럼에 있는 값들을 말함
 			int rows = pstmt.executeUpdate();
 			System.out.println("저장된 행수 : "+rows);
 			
