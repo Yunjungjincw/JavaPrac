@@ -1,18 +1,22 @@
-package dbPackages;
+package dbPackages.ex3; 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-//scott의 emp테이블에 데이터입력 작업을 위한 클래스이다
-public class ChongangInsertEX01 {
+
+//scott의 emp테이블에 데이터삭제 작업을 위한 클래스이다
+//PreparedStatement객체를 이용한 delete문 실행 
+public class DeleteEx {
 
 	public static void main(String[] args) {
 		String url ="jdbc:oracle:thin:@127.0.0.1:1521/xe";
 		String user="scott";
 		String password="tiger";
 		Connection conn=null;
-		Statement  stmt=null;
+		//Statement  stmt=null;
+		PreparedStatement stmt=null;
 		
 		//1.JDBC Driver등록
 		try {
@@ -34,24 +38,33 @@ public class ChongangInsertEX01 {
 		}
 		System.out.println("2.Connection얻기-성공");
 		
-		//3.객체준비-Statement객체 				
+		//3.객체준비-PreparedStatement객체
+		//An object that represents a precompiled SQL statement. 
+		String sql = 
+				"DELETE FROM emp " + 
+				"WHERE empno=?";
+
 		try {
-			stmt = conn.createStatement();
+			//stmt = conn.createStatement();
+			stmt =conn.prepareStatement(sql);
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
 		
 		//4.쿼리실행
-		//query문에 ;미포함, 작은따옴표,공백,괄호 등등 주의=> 실행가능한 쿼리문!
-		String sql = 
-			"INSERT INTO emp(empno,ename,job,hiredate,sal,comm) "+ 
-			"VALUES(9004,'손홍민','매니저',SYSDATE,3000,1500)";
-
+		//query문에 ;미포함, 작은따옴표,공백,괄호 등등 주의=> 실행가능한 쿼리문!			
 		//executeUpdate() 메소드를 호출하면 
 		//주어진 SQL문(insert,update,delete)이 실행. 실행된 레코드수가 리턴된다
 		//executeQuery(select문) : select쿼리문실행. 실행결과를 ResultSet리턴
 		try {
-			int resultCnt = stmt.executeUpdate(sql);
+			//int resultCnt = stmt.executeUpdate(sql);
+			
+			//PreparedStatement객체를 
+			//실행하기전에(executeUpdate() 혹은 executeQuery() )
+			//?개수만큼 set설정해야한다
+			//set데이터타입(?순서,값)
+			stmt.setInt(1, 9004);
+			int resultCnt = stmt.executeUpdate();
 			System.out.println("쿼리문실행결과로 받은 record수="+resultCnt);
 		} catch (SQLException e1) {
 			System.out.println("executeUpdate()실행관련 에러");

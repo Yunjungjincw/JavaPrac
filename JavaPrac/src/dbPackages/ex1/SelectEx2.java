@@ -1,4 +1,4 @@
-package dbPackages;
+package dbPackages.ex1;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -9,7 +9,7 @@ import java.util.Date;
 
 //scott.emp테이블에 데이터조회 작업을 위한 클래스이다
 //PreparedStatement객체를 이용한 select문 실행 
-public class SelectEx3 {
+public class SelectEx2 {
 
 	public static void main(String[] args) {
 		String url ="jdbc:oracle:thin:@127.0.0.1:1521/xe";
@@ -45,7 +45,8 @@ public class SelectEx3 {
 		try {
 			String sql = 
 				"SELECT empno,ename,job,hiredate,sal"+
-				" FROM EMP";
+				" FROM EMP"+
+				" WHERE empno=?";
 
 			stmt =conn.prepareStatement(sql);
 			System.out.println("3.PreparedStatement객체 생성");
@@ -62,10 +63,7 @@ public class SelectEx3 {
 			//실행하기전에(executeUpdate() 혹은 executeQuery() )
 			//?개수만큼 set설정해야한다
 			//set데이터타입(?순서,값)
-			
-			
-			
-//			stmt.setInt(1, 7934);   ==> 전체 불러오기에서는 필요없음.
+			stmt.setInt(1, 7934);
 			
 			//executeUpdate(): insert,update,delete실행
 			//executeQuery() : select실행
@@ -77,27 +75,18 @@ public class SelectEx3 {
 			while(rs.next()) {    //rs.next()는 다음행 (new row)있으면 true리턴
 				//rs.get데이터타입(select컬럼순서) 첫번째 컬럼은 1, 두번째컬럼은 2
 				//rs.getI 데이터타입 ("컬럼명 또는 컬럼별칭")
-				
-				
-				
 				int eno = rs.getInt("empno");
 				String eName= rs.getString("ename");
 				String job = rs.getString("job");
 				Date hdate= rs.getDate("hiredate");
 				double salary =rs.getDouble("sal");
 				
-				System.out.printf("%d/%s,%s는\r",eno,eName,job);
-//				System.out.print("%d",eno);
-//				System.out.print(eName+"/");
-//				System.out.print(job+",");
-				
-				System.out.print("                  ");
-				
-				System.out.print(salary+"");
-				System.out.print(hdate+"");
-				
-				
-				System.out.println();
+	
+				System.out.println(eno);
+				System.out.println(eName);
+				System.out.println(job);
+				System.out.println(salary);
+				System.out.println(hdate);
 			}
 			
 			
