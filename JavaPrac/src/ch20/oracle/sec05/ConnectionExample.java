@@ -56,8 +56,6 @@ public class ConnectionExample {
 			
 			try (Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521/xe", "system", "qwe3776")){
 				System.out.println("연결 성공");
-			
-			
 		//DB작업
 				
 			}catch(SQLException e){
@@ -66,8 +64,6 @@ public class ConnectionExample {
 			System.out.println("연결 끊김");
 
 		//DB작업
-				
-			
 		} catch (ClassNotFoundException e1) {
 			e1.printStackTrace();
 		}
