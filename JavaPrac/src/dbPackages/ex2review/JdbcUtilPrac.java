@@ -2,6 +2,8 @@ package dbPackages.ex2review;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class JdbcUtilPrac {
 
@@ -30,4 +32,28 @@ public class JdbcUtilPrac {
 		// return conn;의 역할은 뭐지 ?
 	}
 	
+
+	public static void close(ResultSet rs) {
+	try {
+		if(rs!=null) {rs.close();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+	}
+	}
+	//자원반납 - Statement 객체 또는 PreparedStatement 객체
+	public static void close(Statement stmt) {
+		try {
+			if(stmt!= null) {stmt.close();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	public static void close (Connection conn) {
+		try {
+			if(conn!=null) {conn.close();}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("Connection해제");
+	}
 }
