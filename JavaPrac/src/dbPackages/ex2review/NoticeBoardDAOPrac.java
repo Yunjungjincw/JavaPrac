@@ -2,8 +2,6 @@ package dbPackages.ex2review;
 
 import java.sql.Connection;
 import java.util.Date;
-
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,14 +12,11 @@ public class NoticeBoardDAOPrac {
 	//dao 란 db 연동하여 db 작업 제공하는 클래스.
 	// 이 클래스는 db 연동하여 dml 기능을 제공하는 클래스 
 	//(DML :  Data Manipulation Language 데이터 조작어
-	
-	
-	public class NoticeBoardDao {
 		//field 
 		//contructor
 		//method
 		//1. 목록 조회
-		public void getNoitceList(int inputnbno) {
+		public void getNoticeList(int inputnbno) {
 			System.out.println("getNoticeList() 진입");
 			
 			PreparedStatement stmt = null;
@@ -223,5 +218,4 @@ public class NoticeBoardDAOPrac {
 			JdbcUtilPrac.close(stmt);
 			JdbcUtilPrac.close(conn);
 	}
-}
 }
