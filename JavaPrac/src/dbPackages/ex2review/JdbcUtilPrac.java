@@ -3,7 +3,7 @@ package dbPackages.ex2review;
 import java.sql.Connection;
 import java.sql.ResultSet;
 
-public class JdbcUtil {
+public class JdbcUtilPrac {
 
 		//field
 	static String url = "jdbc:oracle:thin:@127.0.0.1:1521/xe";
