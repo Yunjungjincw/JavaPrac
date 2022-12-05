@@ -53,7 +53,6 @@ public class NoticeBoardDTO {
 		this.writer = writer;
 		this.rcnt = rcnt;
 		this.empno = empno;
-		
 	}
 
 
