@@ -8,7 +8,7 @@ import java.util.Date;
 
 //DAO:Data Access Object.
 //DAO란 DB 연동하여 DB 작업 제공하는 클래스이다.
-//이 클래스는 Board관련 DB작업 제공하는 클래스이다.
+//이 클래스는 Board관련 DB작업을 제공하는 클래스이다.
 
 //이 클래스에서는 매개변수로 NoticeBoardDTO를 사용
 					
