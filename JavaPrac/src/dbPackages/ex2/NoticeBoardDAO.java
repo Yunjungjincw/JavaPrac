@@ -23,7 +23,7 @@ public class NoticeBoardDAO {
 		
 		//1. 드라이버등록 => 2. 커넥션얻기, 객체준비, 실행, 반납
 		//db연결테스트
-		String sql = "select nbno,title,cre_date,writer"
+		String sql = "select nbno,title,cre_date,writer,rcnt,empno"
 				+ " from  noticeboard"
 				+ " order by nbno desc";
 		
@@ -44,9 +44,11 @@ public class NoticeBoardDAO {
 			String title= rs.getString("title");
 			Date cre_date = rs.getDate("cre_date");
 			String writer = rs.getString("writer");
+			int rcnt = rs.getInt("rcnt");
+			int empno = rs.getInt("empno");
 			
 			
-			System.out.printf("%5d\t%s\t%s\t",nbno,title,cre_date);
+			System.out.printf("%5d\t%s\t%s\t%s\t%s",nbno,title,cre_date,rcnt,empno);
 			System.out.println();
 		}
 			/*
@@ -128,11 +130,12 @@ public class NoticeBoardDAO {
 	
 	
 	//3.등록 - title메목, contant내용, 작성자명writer
-	public void addNotice(String inputtitle, String inputcontant, String inputwriter) {
+	public boolean addNotice(String inputtitle, String inputcontant, String inputwriter) {
 		System.out.printf("addNotice() title:%s, contant:%s, writer:%s\r\n",inputtitle,inputcontant,inputwriter );
 		PreparedStatement stmt = null;
 		Connection conn = null;
-		ResultSet rs = null;
+		boolean result = false;
+//		ResultSet rs = null;  = select 할 때만 넣어주는 것.
 		
 		//1. 드라이버등록 => 2. 커넥션얻기, 객체준비, 실행, 반납
 		//db연결테스트
@@ -148,13 +151,25 @@ public class NoticeBoardDAO {
 			stmt.setString(3, inputwriter);
 //			rs = stmt.executeQuery();
 			
+		// 실행 
+			//insert 에 성공하면 리턴되는 행수는 1
+			// insert에 실패시에는 리턴되는 행수는 0
 			
-			int rows = stmt.executeUpdate();
-			System.out.println("등록 완료 : "+rows);
+			
+			int cnt = stmt.executeUpdate();
+			System.out.println("등록 완료 : "+cnt);
+			
+			if(cnt==1) {
+				System.out.println("입력 성공");
+				result = true;
+			}else {
+				System.out.println("입력실패");
+				result=false;
+			}
 			
 			
 			
-			stmt.close();
+//			stmt.close();
 			//4.실행
 			/*
 			 * rs.get데이터타입(select순서)
@@ -165,18 +180,21 @@ public class NoticeBoardDAO {
 		}
 		
 		//5.반납
-		JdbcUtil.close(rs);
+//		JdbcUtil.close(rs); => select 할 때만 넣어주는 것.
 		JdbcUtil.close(stmt);
 		JdbcUtil.close(conn);
+		
+		return result;
 	} // addNotice 끝
 	
 	
 	//4.수정 -title제목, contant내용, 작성자명writer
-	public void updateNotice( int inputnbno, String inputtitle, String inputcontant, String inputwriter) {
+	public boolean updateNotice( int inputnbno, String inputtitle, String inputcontant, String inputwriter) {
 		System.out.printf("updateNotice() nbno:%d title:%s, contant:%s, writer:%s\r\n",inputnbno,inputtitle,inputcontant,inputwriter);
 		PreparedStatement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
+		boolean result = false;
 		
 		//1. 드라이버등록 => 2. 커넥션얻기, 객체준비, 실행, 반납
 		//db연결테스트
@@ -194,8 +212,15 @@ public class NoticeBoardDAO {
 			stmt.setString(3, inputwriter);
 			stmt.setInt(4, inputnbno);
 	
-			int rows = stmt.executeUpdate();
-			System.out.println("수정 완료 : "+rows);
+			int resultUp = stmt.executeUpdate();
+			System.out.println("리턴되는 행수"+resultUp);
+			if(resultUp==1) {
+				System.out.println("수정 완료");
+				result = true;
+			} else {
+				System.out.println("수정 실패");
+				result = false;
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -205,31 +230,36 @@ public class NoticeBoardDAO {
 		JdbcUtil.close(rs);
 		JdbcUtil.close(stmt);
 		JdbcUtil.close(conn);
+		return result;
+		
 	}; //updateNotice 끝
 	
 	
-	//5.삭제 -nbno는 글번호
-	public void delNotice(int inputnbno) {
+	//5.삭제
+	// 매개변수 - inputnbno는 글번호
+	// 리턴유형 int delete 실행시 리턴되는 행수
+	public int delNotice(int inputnbno) {
 		System.out.println("delNotice()진입 nbno="+inputnbno);
 		PreparedStatement stmt = null;
 		Connection conn = null;
-		ResultSet rs = null;
-		
+		int resultCnt = 0; //delete 실행시 리턴되는 행수를 저장하기위한 변수선언 및 초기화
 		//1. 드라이버등록 => 2. 커넥션얻기, 객체준비, 실행, 반납
 		//db연결테스트
-		String sql = "DELETE FROM noticeboard\r\n"
+		String sql = "DELETE FROM noticeboard"
 				+ " where nbno = ?";
 		
 		conn =JdbcUtil.getConnection();
-		
 		//3. 객체준비
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, inputnbno);
-			rs = stmt.executeQuery();
 			
-			int rows = stmt.executeUpdate();
-			System.out.println("삭제 완료 : "+rows);
+			resultCnt = stmt.executeUpdate();  // 타입이 붙으면 선언해주는건
+			if(resultCnt==1) {
+				System.out.println("삭제 완료");
+			}else {
+				System.out.println("삭제 실패");
+			}
 			
 			
 		} catch (SQLException e) {
@@ -243,8 +273,9 @@ public class NoticeBoardDAO {
 		}
 		
 		//5.반납
-		JdbcUtil.close(rs);
 		JdbcUtil.close(stmt);
 		JdbcUtil.close(conn);
+		
+		return resultCnt;
 	}
 }

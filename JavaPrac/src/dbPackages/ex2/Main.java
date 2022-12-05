@@ -34,7 +34,9 @@ public class Main {
 				String contant= sc.next();
 				System.out.print("작성자: ");
 				String writer= sc.next();
-				ntBoardDAO.addNotice(title, contant, writer);
+				boolean insertResult = ntBoardDAO.addNotice(title, contant, writer);
+				System.out.println("insertResult = "+insertResult);
+//				ntBoardDAO.addNotice(title, contant, writer);
 			}else if(num==4) {	//4.수정
 				System.out.println("수정 정보를 입력하세요.");
 				System.out.print("수정할 글번호 :");
@@ -45,11 +47,13 @@ public class Main {
 				String contant= sc.next();
 				System.out.print("작성자: ");
 				String writer= sc.next();
-				ntBoardDAO.updateNotice(nbno,title, contant, writer);
+				boolean r = ntBoardDAO.updateNotice(nbno,title, contant, writer);
+				System.out.println("updateNotice ()실행결과"+r);
 			}else if(num==5) {	//5.삭제
 				System.out.printf("삭제할 글번호: ");
 				int nbno = sc.nextInt();
-				ntBoardDAO.delNotice(nbno);
+				int resultCnt = ntBoardDAO.delNotice(nbno);
+				System.out.println("resultCnt = "+resultCnt);
 			}else if(num==6) {	//6.종료 -> 반복문 종료
 				break;
 			}else {
