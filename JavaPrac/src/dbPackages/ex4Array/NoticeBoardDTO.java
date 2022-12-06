@@ -14,6 +14,18 @@ import java.util.Date;
  * ***********************************************
  * getter / setter 로직만이 필요하지 다른 로직이 필요하지 않은 것.
  * ***********************************************
+ * 
+// * # VO클래스
+
+- DAO 클래스를 구현하면 데이터베이스에 연결할 때, 
+데이터베이스 안에 있는 테이블의 속성을 가져오거나 , 
+넣어주게 됨(select = executeQuery  //////   insert, update ,delete  =  executeUpdate)
+- 그래서 항상 데이터 베이스 안에 있는 테이블의 컬럼과 같은 값을 갖는 자바빈 클래스를 만드는데, 
+이게바로 VO 클래스
+- VO 클래스 (Value Object) / DTO 클래스 (Data Transfer Object)라고 부름
+- DAO 클래스를 이용하여 데이터베이스에서 데이터를 관리할 때 데이터를 일반적인 변수에 할당하여 작업할수도 있지만, 
+별도의 VO 클래스를 작성하여 데이터베이스와 관련된 변수들의 모음 역할을 함.
+- VO 클래스의 변수들은 외부에서 쉽게 접근할 수 없도록 은닉(private)처리 함
  */
 
 
@@ -70,7 +82,6 @@ public class NoticeBoardDTO {
 	//object 로 부터 상속받은 toString()은
 	//객체의 정보를 sTring 형태로 제공하는 메소드였다
 //	하지만 이 클래스에서는 
-	}
 	//setter
 	public void setNbno(int nbno) {
 		this.nbno=nbno;
@@ -129,12 +140,14 @@ public class NoticeBoardDTO {
 	public int getEmpno() {
 		return empno;
 	}
+
+	
+	//오버라이드
+	// 상위클래에서 사용한 
 	@Override
 	public String toString() {
 		return "NoticeBoardDTO [nbno=" + nbno + ", title=" + title + ", contant=" + contant + ", cre_date=" + cre_date
-				+ ", writer=" + writer + ", rcnt=" + rcnt + ", empno=" + empno + ", getNbno()=" + getNbno()
-				+ ", getTitle()=" + getTitle() + ", getContant()=" + getContant() + ", getCre_date()=" + getCre_date()
-				+ ", getWriter()=" + getWriter() + ", getRcnt()=" + getRcnt() + ", getEmpno()=" + getEmpno() + "]";
+				+ ", writer=" + writer + ", rcnt=" + rcnt + ", empno=" + empno + "]";
 	}
 	
 	

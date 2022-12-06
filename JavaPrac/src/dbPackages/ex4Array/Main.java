@@ -8,7 +8,9 @@ import java.util.Scanner;
 public class Main {
 
 	public static void main(String[] args) {
-		NoticeBoardDAO ntBoardDAO = new NoticeBoardDAO();//DAO 객체 생성
+		NoticeBoardDAO ntBoardDAO = new NoticeBoardDAO();
+		//DAO 객체 생성 = > DAO 는 데이터베이스에 접속해서 select delete insert등을 작업하는 클래스
+		// DAO를 객체로 받는 이유는 ? 객체를 받으면 어떻게 되는지 ?
 		 Scanner sc = new Scanner(System.in);
 		
 		

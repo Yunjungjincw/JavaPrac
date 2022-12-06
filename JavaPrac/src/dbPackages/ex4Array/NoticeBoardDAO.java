@@ -24,24 +24,22 @@ public class NoticeBoardDAO {
 		PreparedStatement stmt = null;
 		Connection conn = null;
 		ResultSet rs = null;
-		// 리스트선언
-		// 인터페이스타입 참조변수명 = new 구현 클래스명();
-		List<NoticeBoardDTO> list = new ArrayList();
-		// 인터페이스타입 참조변수명 = new 클래스명 ();
-		//ArrayList <NoticeBoardDTO> = new ArrayList();
+
 		
 		//db연결테스트
 		String sql = "select nbno,title,contant,cre_date,writer,rcnt,empno"
 				+ " from  noticeboard"
 				+ " order by nbno desc";
 		
-		conn =JdbcUtil.getConnection();
+		conn =JdbcUtil.getConnection(); // 드라이버등록 & 커넥션 얻기
+		
+		// 리스트선언
+		// 인터페이스타입 참조변수명 = new 구현 클래스명();
+		List<NoticeBoardDTO> list = new ArrayList();
+		// 인터페이스타입 참조변수명 = new 클래스명 ();
+		//ArrayList <NoticeBoardDTO> = new ArrayList();
 
-//		
-//		// 인터페이스타입 참조변수명 = new 구현 클래스명();
-//		List<NoticeBoardDTO> list = new ArrayList();
-//		// 인터페이스타입 참조변수명 = new 클래스명 ();
-//		//ArrayList <NoticeBoardDTO> = new ArrayList();
+
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
@@ -62,8 +60,6 @@ public class NoticeBoardDAO {
 			
 			
 			NoticeBoardDTO nbDdto = new NoticeBoardDTO();
-			
-			
 			nbDdto.setNbno(nbno);
 			nbDdto.setTitle(title);
 			nbDdto.setContant(contant);
@@ -142,19 +138,14 @@ public class NoticeBoardDAO {
 			ntDTOobj = new NoticeBoardDTO(nbno,title,contant,cre_date,writer,rcnt,empno );
 			
 			//\t는 공백임   %s 내
-			System.out.printf("%5d\t%s\t%s\t%s\t%s\t%s\t%s\t",nbno,title,contant,cre_date,writer,rcnt,empno);
-			System.out.println();
+//			System.out.printf("%5d\t%s\t%s\t%s\t%s\t%s\t%s\t",nbno,title,contant,cre_date,writer,rcnt,empno);
+//			System.out.println();
+		
 		}else { //select의 결과로 record가 존재x
 			System.out.println("조회한 글번호("+nbDTO.getNbno()+")에 해당하는 글이 존재하지 않아요.");
 		}
 		
 		
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		try {
-			stmt.executeQuery();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

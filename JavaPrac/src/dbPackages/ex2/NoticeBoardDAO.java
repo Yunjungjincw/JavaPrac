@@ -30,6 +30,7 @@ public class NoticeBoardDAO {
 		conn =JdbcUtil.getConnection();
 
 		//3. 객체준비
+		// 
 		try {
 			stmt = conn.prepareStatement(sql);
 			rs = stmt.executeQuery();
