@@ -1,4 +1,4 @@
-package dbPackages.ex4;
+package dbPackages.ex4Array;
 
 import java.util.Date;
 
@@ -57,12 +57,20 @@ public class NoticeBoardDTO {
 		this.writer = writer;
 		this.rcnt = rcnt;
 		this.empno = empno;
+		
+		
 	}
 
 
+	
 	//method
 //	[접근제한자][제어자] 리턴유형 메서드명{매개변수) {}
 	
+	
+	//object 로 부터 상속받은 toString()은
+	//객체의 정보를 sTring 형태로 제공하는 메소드였다
+//	하지만 이 클래스에서는 
+	}
 	//setter
 	public void setNbno(int nbno) {
 		this.nbno=nbno;
@@ -121,5 +129,16 @@ public class NoticeBoardDTO {
 	public int getEmpno() {
 		return empno;
 	}
+	@Override
+	public String toString() {
+		return "NoticeBoardDTO [nbno=" + nbno + ", title=" + title + ", contant=" + contant + ", cre_date=" + cre_date
+				+ ", writer=" + writer + ", rcnt=" + rcnt + ", empno=" + empno + ", getNbno()=" + getNbno()
+				+ ", getTitle()=" + getTitle() + ", getContant()=" + getContant() + ", getCre_date()=" + getCre_date()
+				+ ", getWriter()=" + getWriter() + ", getRcnt()=" + getRcnt() + ", getEmpno()=" + getEmpno() + "]";
+	}
+	
+	
+	
+	
 }
 
