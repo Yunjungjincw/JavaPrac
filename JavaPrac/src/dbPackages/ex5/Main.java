@@ -1,7 +1,10 @@
-package dbPackages.ex4Array;
+package dbPackages.ex5;
 
-import java.util.List;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.Set;
 
 //메인클래스
 //web에서는 불필요한 부분
@@ -17,20 +20,57 @@ public class Main {
 		while(true) {
 			System.out.println();
 			System.out.println();
-			System.out.println("-1.목록조회 2.상세조회 3.등록 4.수정 5.삭제 6.종료-");
+			System.out.println("-0.목록조회(Map방식),1.목록조회(Set방식) 2.상세조회 3.등록 4.수정 5.삭제 6.종료-");
 			System.out.printf("원하는 메뉴번호를 입력하세요:");
 			int num = sc.nextInt();	//Scans the next token of the input as an int. 
-		
-			if(num==1) {	//1.목록조회
-				List<NoticeBoardDTO>  ntDTOList = ntBoardDAO.getNoticeList();
+			
+		if(num==0) {//0. 목록조회(Map방식)	
+			Map<Integer, NoticeBoardDTO> map= ntBoardDAO.getNoticeList2();
+			
+			//key를 이용하면 value 를 꺼내기
+//			key를 알면 get(키명)
+//			NoticeBoardDTO nbdto = map.get(1);
+//			System.out.println(nbdto);
+			
+			
+			
+			System.out.println("---아래는 keySet()+while이용---");
+				//key 를 모르면 모든 key를 꺼내기, while 반복문
+				Set<Integer> keys = map.keySet();
+				Iterator<Integer> keyIterator = keys.iterator();
+				while(keyIterator.hasNext()) {
+				Integer key	= keyIterator.next();
+				NoticeBoardDTO nbdto = map.get(key);
+				System.out.println(nbdto);
+				}
+			
+			System.out.println("----아래는 entrySet()이용---");
+			  	Set<Map.Entry<Integer, NoticeBoardDTO>> entrySet = map.entrySet();
+	            Iterator<Map.Entry<Integer, NoticeBoardDTO>> entryIterator
+	            =entrySet.iterator();
+	            while(entryIterator.hasNext()) {
+	            Entry<Integer, NoticeBoardDTO> entry= entryIterator.next();
+	            Integer key=entry.getKey();
+	            NoticeBoardDTO nbtdo=entry.getValue();
+	            System.out.println(key+":"+nbtdo);
+	            }
+
+			
+			
+		}else if(num==1) {	//1.목록조회(Set방식)
+				Set<NoticeBoardDTO>  ntDTOList = ntBoardDAO.getNoticeList();
 				System.out.println("총 게시글 수 :"+ntDTOList.size());
 				
-				
-				for(int i=0; i<ntDTOList.size(); i++) {
-					System.out.println((ntDTOList.get(i))); //get 은 list에 담겨있는 것들을 가져옴
+				//향상된 for문
+//				for(NoticeBoardDTO ntdto : ntDTOList) {
+//					System.out.println(ntdto);
+//				}
+				System.out.println("-----Iterator를 이용한 출력-----");
+				Iterator<NoticeBoardDTO>iterator = ntDTOList.iterator();
+				while (iterator.hasNext()) {
+					NoticeBoardDTO nbtdo=iterator.next();
+					System.out.println(nbtdo);
 				}
-				
-				
 				
 				
 				
@@ -41,11 +81,11 @@ public class Main {
 				// "nbDTO" 매개변수 주소를 넘기기 위한 것.
 				NoticeBoardDTO nbDTO = new NoticeBoardDTO(nbno); // 클래스타입으로 변경
 				//리턴유형이 NoticeBoardDTO클래스인 getNotice()호출
-				NoticeBoardDTO resultNTDTO = ntBoardDAO.getNotice(nbDTO);
+				
+				NoticeBoardDTO resultNTDTO=ntBoardDAO.getNotice(nbno);
 					
 				// 콘솔에 리턴받은 NoticeBoardDTO 객체내용을 출력
-				System.out.println("리턴받은 NoticeBoardDTO="+resultNTDTO);
-				System.out.println("--아래는 특정글번호의 상세내용이 컬럼별 한줄로 출력");
+				System.out.println("리턴받은 NoticeBoardDTO="+resultNTDTO);//주소
 				
 				//
 				System.out.println("nbno컬럼값:"+resultNTDTO.getNbno());
@@ -96,8 +136,9 @@ public class Main {
 				System.out.printf("삭제할 글번호: ");
 				int nbno = sc.nextInt();
 				
-				NoticeBoardDTO nbDTO = new NoticeBoardDTO(nbno);
-				int resultRowCnt = ntBoardDAO.delNotice(nbDTO);
+//				NoticeBoardDTO nbDTO = new NoticeBoardDTO(nbno);
+//				int resultRowCnt = ntBoardDAO.delNotice(nbDTO);
+				int resultRowCnt = ntBoardDAO.delNotice(nbno);
 				System.out.println("resultCnt = "+resultRowCnt);
 			}else if(num==6) {	//6.종료 -> 반복문 종료
 				break;

@@ -28,17 +28,24 @@ public class NoticeBoardDAO {
 				+ " order by nbno desc";
 		
 		conn =JdbcUtil.getConnection();
+		// JdbcUtil 클래스를 사용해서 연결해줌. 그리고 conn에 담아줌
 
 		
 		try {
 			stmt = conn.prepareStatement(sql);
+			// prepareStatement는 String 타입의 sql을 stmt에 담아줌
 			rs = stmt.executeQuery();
+			// stmt를 이용해서 query문을 사용함 그리고 그 내용을 rs에 담아줘
+			
+			// => 그리고 아래 코드를 실행한다   while 문을 실행해줌
 			
 			//4.실행
 			/*
 			 * rs.get데이터타입(select순서)
 				rs.get데이터타입("컬럼명")
 			 */
+			// 어떤 데이터를 꺼내올지 모를 때는 while을 쓴다고 함 
+			// while이랑 for문을 차이
 		while(rs.next() ) {
 			int nbno = rs.getInt("nbno");
 			String title= rs.getString("title");
@@ -47,6 +54,9 @@ public class NoticeBoardDAO {
 			String writer = rs.getString("writer");
 			int rcnt = rs.getInt("rcnt");
 			int empno = rs.getInt("empno");
+			
+			//while문의 종료 조건 ?
+			//=>
 			
 			
 			System.out.printf("%5d\t%s\t%s\t%s\t%s\t%s\t%s\t%s",nbno,title,contant,cre_date,writer,rcnt,empno);
