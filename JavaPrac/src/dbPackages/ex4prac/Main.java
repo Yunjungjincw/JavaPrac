@@ -17,9 +17,9 @@
 //			System.out.println("-1.목록조회 2.상세조회 3.등록 4.수정 5.삭제 6.종료-");
 //			System.out.printf("원하는 메뉴번호를 입력하세요:");
 //			int num = sc.nextInt();	//Scans the next token of the input as an int. 
-//		
+//			NoticeBoardDAO nbno2 = new NoticeBoardDAO();
 //			if(num==1) {	//1.목록조회
-//				ntBoardDAO.getNoticeList(num);
+//				ntBoardDAO.(nbno2);
 //			}else if(num==2) {	//2.상세조회
 //				System.out.print("조회할 글번호: ");
 //				int nbno =sc.nextInt();

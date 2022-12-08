@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.Set;
 
+
 //메인클래스
 //web에서는 불필요한 부분
 public class Main {
-
 	public static void main(String[] args) {
 		NoticeBoardDAO ntBoardDAO = new NoticeBoardDAO();
 		//DAO 객체 생성 = > DAO 는 데이터베이스에 접속해서 select delete insert등을 작업하는 클래스
@@ -31,8 +31,6 @@ public class Main {
 //			key를 알면 get(키명)
 //			NoticeBoardDTO nbdto = map.get(1);
 //			System.out.println(nbdto);
-			
-			
 			
 			System.out.println("---아래는 keySet()+while이용---");
 				//key 를 모르면 모든 key를 꺼내기, while 반복문
