@@ -15,7 +15,7 @@ import java.util.List;
 //이 클래스에서는 매개변수로 NoticeBoardDTO를 사용+
 //         리턴유형을  NoticeBoardDTO로 지정
 public class NoticeBoardDAO {
-	
+// main 에서 실행하면 
 	
 	//1.목록조회 public 게시글목록 getNoticeList() {
 	//리턴유형이  NoticeBoardDTO클래스
@@ -38,21 +38,29 @@ public class NoticeBoardDAO {
 		//ArrayList<NoticeBoardDTO> list=new ArrayList();
 		try {
 			stmt = conn.prepareStatement(sql);
+			System.out.println("sql  :   "+sql);
 			rs = stmt.executeQuery();
+			System.out.println("rs : "+rs);
+			// rs 는 prepareStatement가 쿼리문 실행한 것을 담은 객체 ? 임
 			System.out.println("try{}안!");
 			//4.실행  
 			/*rs.get데이타입(select순서)
 			  rs.get데이타입("컬럼명")*/
 			while( rs.next() ) {
-				int nbno = rs.getInt("nbno");
+				int nbno = rs.getInt("nbno");;
+				//while 문이 돌면서 nbno에 해당하는 값을 다 출력함
 				String title  = rs.getString("title");
 				String contant=rs.getString("contant");
 				Date cre_date = rs.getDate("cre_date");
 				String writer = rs.getString("writer");
 				int rcnt=rs.getInt("rcnt");//조회수
 				int empno=rs.getInt("empno");//사원번호
+			
 				
 				//방법1.기본생성자를 이용하여 객체를 생성하는 경우
+				// NoticeBoardDTO 클래스에 있는 생성자를 사용
+				// 기본 생성자는 매개값을 받는게 없으니까 뒤에 아무것도 입력하지 않고 
+				// NoticeBoardDTO 로 객체를 생성하면 기본 생성자로 객체를 생성함
 				NoticeBoardDTO nbdto=new NoticeBoardDTO();
 				nbdto.setNbno(nbno);
 				nbdto.setTitle(title);
@@ -89,7 +97,7 @@ public class NoticeBoardDAO {
 	//리턴유형이  NoticeBoardDTO클래스
 	public void getNotice(NoticeBoardDTO inputNbno) {
 //	public NoticeBoardDTO getNotice(int nbno) {
-		System.out.println("getNotice()진입 nbDTO="+inputNbno);//주소
+//		System.out.println("getNotice()진입 nbDTO="+inputNbno);//주소
 //		System.out.println("getNotice()진입 nbDTO.getNbno()="+nbno);
 		PreparedStatement stmt = null;
 		Connection conn = null;
@@ -154,6 +162,9 @@ public class NoticeBoardDAO {
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, ntDTO.getTitle());
+			// ntDTO는 객체겠네 그럼 getTitle은 객체를 생성했으니 사용한거고
+			// 그럼 쿼리문 ? 첫번째에 ntDTO 객체에 getTitle을 사용해서 그 값을 넣어주는건가 
+			//stmt는 그럼 setString을 통해서 1, 자리에  ntDTO.getTitle() 값을 받는거네 ? 
 			stmt.setString(2, ntDTO.getContant());
 			stmt.setString(3, ntDTO.getWriter());
 			
@@ -166,7 +177,6 @@ public class NoticeBoardDAO {
 				System.out.println("입력실패");
 				result=false;
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -178,15 +188,15 @@ public class NoticeBoardDAO {
 	
 	//4.수정   
 	public boolean updateNotice(NoticeBoardDTO ntDTO) {
-		System.out.println("updateNotice() ntDTO="+ntDTO);
+//		System.out.println("updateNotice() ntDTO="+ntDTO);
 		System.out.printf("updateNotice() nbno:%d, title:%s, contant:%s, writer:%s\r\n"
 				,ntDTO.getNbno(),ntDTO.getTitle(),ntDTO.getContant(),ntDTO.getWriter());
 		Connection conn = null;
 		PreparedStatement stmt = null;
 		 boolean result = false;
 		String sql = "update noticeboard "+
-					 "set title = ?, contant= ?,writer = ? "+
-					 "where nbno = ?";
+					 " set title = ?, contant= ?,writer = ? "+
+					 " where nbno = ?";
 		
 		conn = JdbcUtil.getConnection();//1.드라이버등록&2.커넥션얻기
 
@@ -225,6 +235,9 @@ public class NoticeBoardDAO {
 		int resultCnt = 0;//delete실행시 리턴되는 행수를 저장하기위한 변수선언 및 초기화
 		String sql = "delete from noticeboard " + 
 					 "where nbno = ?"; 
+		//아래 코드에서 수정하거나 등록 삭제 기능은 없음. 그냥 아래 코드들은 쿼리문을 실행하는 역할을 함
+		// 그래서 그 코드가 실행 될 때 문제 있으면 try catch문으로 에러를 컨트롤 하는거고,
+		// 다 쿼리문이 실행되었으면  close를 통해서 
 		
 		conn = JdbcUtil.getConnection();//1.드라이버등록&2.커넥션얻기
 		try {
@@ -244,6 +257,10 @@ public class NoticeBoardDAO {
 		
 		JdbcUtil.close(stmt);
 		JdbcUtil.close(conn);
+		
+		//도서관에서 책을 빌렸는데
+		//책을 분실하면 반납을 못하잖아요 
+		//책을 가지고 있어야 도서관에 반납을 하죠
 		
 		return resultCnt;
 	}	

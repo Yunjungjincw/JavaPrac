@@ -12,31 +12,29 @@ import dbPackages.ex4.JdbcUtil;
 //DAO data Access object
 //DAO 란 DB 연동하여 DB 작업 제공하는 클래스
 //이 클래스는 Board 관련 db 작업을 제공하는 클래스
-
 // 이 클래스에서는 매개변수로 NoticeBoardDTO를 사용
 
+// DAO 클래스 
+// int 타입의 매개값을 받는 메소드를 생성하고, 그 타입은 NoticeBoardDAO 으로 만든다. =>
+// 
 public class NoticeBoardDAO{
 	
 	public NoticeBoardDAO getNoticeList(int inputnbno) {
 	System.out.println("getNotice() 접근");
 	NoticeBoardDAO nbno1 = new NoticeBoardDAO();
 	PreparedStatement stmt = null; 
+	// 초기값 null로 초기화
 	Connection conn = null;
 	ResultSet rs = null;
 	
-	
+	// 형태는 String 타입 sql 에 쿼리문을 저장하는건데,
 	String sql = "select nbno,title,contant,cre_date,writer,rcnt,empno"
 				+ " from  noticeboard"
 				+ " order by nbno desc";
-
-	
 	conn = JdbcUtil.getConnection();
-
-
 			try {
 				stmt = conn.prepareStatement(sql);
-		//****************PreparedStatement 인터페이스는 sql문의 결과값을 받아올 용도이다. 
-				//********** PreparedStatement 쓰면 자동으로 try catch문이 생성되는 이유
+				// string 타입의 쿼리문 저장된 sql을 
 				rs = stmt.executeQuery();
 				//************* rs 에는 PreparedStatement stmt를 이용해서 쿼리문을 실행하여 rs에 담아준다.
 				// 그럼 rs에서 쿼리문 실행한 결과값을 받을 수 있겠네 ?

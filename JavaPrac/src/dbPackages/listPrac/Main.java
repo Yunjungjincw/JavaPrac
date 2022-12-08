@@ -34,6 +34,7 @@ public class Main {
 				System.out.print("조회할 글번호:");
 				int nbno=sc.nextInt();//user로 부터 글번호 입력받아 nbno에 저장
 				
+				//NoticeBoardDTO 객체를 생성하려면 생성자가 있어야 됨
 				ntBoardDAO.getNotice(new NoticeBoardDTO(nbno));
 				
 				
@@ -66,6 +67,9 @@ public class Main {
 				//user로 부터 입력받은 제목,내용,작성자를
 				//NoticeBoardDTO의 setter를 호출하여 설정한 후 
 				nbDTOobj.setTitle(title);
+				//nbDTOobj 참조변수를 이용 근데 nbDTOobj 참조변수는 생성자를 통해서 만들어졌음. 
+				//setter의 기능이 정확이 뭔데 
+				// => 
 				nbDTOobj.setContant(contant);
 				nbDTOobj.setWriter(writer);
 				//ntBoardDAO.addNotice()를 호출하면서 넘기자
@@ -86,10 +90,11 @@ public class Main {
 				//외부에서   클래스명 참조변수=new 클래스명();
 				NoticeBoardDTO nbDTOobj=new NoticeBoardDTO();
 				//필드값을 설정해서 ntBoardDAO의   updateNotice()호출시 넘긴다
+				nbDTOobj.setNbno(nbno);
 				nbDTOobj.setTitle(title);
 				nbDTOobj.setContant(contant);
 				nbDTOobj.setWriter(writer);
-				nbDTOobj.setNbno(nbno);
+				
 				
 				boolean r=ntBoardDAO.updateNotice(nbDTOobj);
 				//업데이트성공하면 true리턴, 업데이트실패하면 false리턴
