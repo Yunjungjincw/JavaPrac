@@ -109,7 +109,6 @@ public class NoticeBoardDAO {
 		String sql ="SELECT nbno,title,contant,cre_date,writer,rcnt,empno "+
 					"FROM noticeboard "+
 					"WHERE nbno = ?";
-		
 		try {
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, inputNbno.getNbno());
